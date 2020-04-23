@@ -13,7 +13,7 @@ Statistics::Statistics(int totalStudentCount, int numWindows) {
     numStudentsLongWait = 0;    // update as each student finishes (4)
 
     meanWindowIdleTime = 0;     // calculate at end (5)
-
+   
     longestWindowIdleTime = 0;      // update as each Windows is occupied (6)
     numWindowsIdleOver5Min = 0;     // update as each Window is occupied (7)
 
@@ -26,20 +26,20 @@ Statistics::Statistics(int totalStudentCount, int numWindows) {
     studentWaitTime = new int[totalStudentCount];       // array needed to calculate median wait for students
     currentStudentIndex = 0;
 
-    this->numWindows = numWindows;
+    this->numWindows = numWindows;    
 }
 
 // called when student leaves window
 void Statistics::finishStudent(Student* student, int currentTime) {
     int waitTime = currentTime - student->timeArrived;      // calculates waitTime
-
+    
     if (waitTime > longestWait) {                           // check if this was the longest wait
          longestWait = waitTime;
     }
     if (waitTime > 10) {                                    // check if wait time exceed 10 minutes
         numStudentsLongWait++;
     }
-    totalWaitTime += waitTime;
+    totalWaitTime += waitTime;  
 
     studentWaitTime[currentStudentIndex++] = waitTime;      // holds wait time for each student
     delete student;
@@ -60,8 +60,8 @@ void Statistics::windowOccupied(RegistrarWindow *w, int currentTime) {
 
 // called when a window is being vacated
 void Statistics::windowVacated(RegistrarWindow *w, int currentTime) {
-    int busyTime = currentTime - w->timeLastOccupied;       // window was busy, calculate the time the window was occupied
-    totalWindowBusyTime += busyTime;
+    int busyTime = currentTime - w->timeLastOccupied;       // window was busy, calculate the time the window was occupied 
+    totalWindowBusyTime += busyTime;                        
     w->timeLastVacated = currentTime;                       // window is free now
 }
 
@@ -80,15 +80,15 @@ void bubbleSort(int arr[], int n)
     int i, j;
     for (i = 0; i < n - 1; i++)
 
-        // Last i elements are already in place
+        // Last i elements are already in place  
         for (j = 0; j < n - i - 1; j++)
             if (arr[j] > arr[j + 1])
                 swap(&arr[j], &arr[j + 1]);
 }
 
 void Statistics::printStats(int currentTime, RegistrarWindow* windows) {
-
-
+ 
+    
     // sort array, calculate median
     bubbleSort(studentWaitTime, totalStudentCount);
 
@@ -121,3 +121,4 @@ void Statistics::printStats(int currentTime, RegistrarWindow* windows) {
     cout << "Number of windows idle for over 5 minutes: " << numWindowsIdleOver5Min << endl;
 
 }
+
