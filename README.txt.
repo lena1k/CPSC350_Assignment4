@@ -25,3 +25,6 @@ To run:
 1) navigate folder
 2) g++ *.cpp
 3) ./a.out test.txt
+
+The way I calculated the mean student wait time is from the time to student entered the registrar office and left. 
+Inclusive of the time they needed of the window.
